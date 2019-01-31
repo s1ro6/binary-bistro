@@ -1,2 +1,2 @@
-# lazy-guy-in-bed
-It is too lazy, yeah?
+# Lazy Guy in Bed
+I'm tooooo lazy...
