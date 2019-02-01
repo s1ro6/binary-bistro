@@ -6,8 +6,8 @@ import shutil
 TEMP_TRASH_PATH = os.path.expanduser('~/Desktop/_FuckingCaches_')
 
 
-# Remove JetBrain IDE's cache.¬
 def remove_jetbrain_cache():
+    """ Remove JetBrain IDE's cache. """
     base_path = os.path.expanduser('~/Library/Caches')
     for name in os.listdir(base_path):
         regex = r'^(WebStorm)\d{4}\.\d+'
@@ -20,16 +20,16 @@ def remove_jetbrain_cache():
     # os.system(f'open {TEMP_TRASH_PATH}')
 
 
-# Remove Xcode cache.
 def remove_xcode_cache():
-    # Remove Derived data
+    """ Remove the Xcode's removable caches. """
     derived_path = os.path.expanduser('~/Library/Developer/Xcode/DerivedData')
-    for f in os.listdir(derived_path):
-        delete_cache(os.path.join(derived_path, f))
-        print(os.path.join(derived_path, f))
+    # for f in os.listdir(derived_path):
+        # print(os.path.join(derived_path, f))
+        # delete_cache(os.path.join(derived_path, f))
 
-    # Remove archives data
     archives_path = os.path.expanduser('~/Library/Developer/Xcode/Archives')
+    for f in os.listdir(archives_path):
+        print(os.path.join(archives_path, f))
 
 
 # Move the files to temp trash.
