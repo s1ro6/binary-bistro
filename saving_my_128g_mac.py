@@ -24,8 +24,8 @@ def remove_xcode_cache():
     """ Remove the Xcode's removable caches. """
     derived_path = os.path.expanduser('~/Library/Developer/Xcode/DerivedData')
     # for f in os.listdir(derived_path):
-        # print(os.path.join(derived_path, f))
-        # delete_cache(os.path.join(derived_path, f))
+    # print(os.path.join(derived_path, f))
+    # delete_cache(os.path.join(derived_path, f))
 
     archives_path = os.path.expanduser('~/Library/Developer/Xcode/Archives')
     for f in os.listdir(archives_path):
