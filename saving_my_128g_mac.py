@@ -1,4 +1,6 @@
 #!/usr/bin/env python3
+# Oh my god, Plz save my little brother 128GB MBP...
+
 import os
 import re
 import shutil
