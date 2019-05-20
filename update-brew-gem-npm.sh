@@ -2,8 +2,8 @@
 
 # Update Homebrew
 brew update --verbose
-brew upgrade --display-times --verbose
-brew cask upgrade --display-times --verbose
+brew upgrade --verbose
+brew cask upgrade --verbose
 brew cleanup --verbose
 
 # Update RubyGems
@@ -12,4 +12,5 @@ gem cleanup -V
 
 # Update Node npm
 npm cache clean -f
+npm install -g npm
 
