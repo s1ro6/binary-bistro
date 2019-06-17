@@ -1,16 +1,28 @@
 #!/usr/bin/env bash
 
-# Update Homebrew
-brew update --verbose
-brew upgrade --verbose
-brew cask upgrade --verbose
-brew cleanup --verbose
+echo
+echo "==========================="
+echo "    Upadate Homebrew...    "
+echo "==========================="
+echo
+brew update
+brew upgrade
+brew cask upgrade
+brew cleanup
 
-# Update RubyGems
-gem update -V
-gem cleanup -V
+echo
+echo "==========================="
+echo "    Upadate Ruby Gem...    "
+echo "==========================="
+echo
+sudo gem update --system
+sudo gem update -V
+sudo gem cleanup -V
 
-# Update Node npm
-npm cache clean -f
+echo
+echo "==========================="
+echo "   Upadate Node's npm...   "
+echo "==========================="
+echo
 npm install -g npm
-
+npm cache clean -f
