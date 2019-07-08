@@ -1,28 +1,28 @@
 #!/usr/bin/env bash
 
-echo
+echo -e "\033[33m"
 echo "==========================="
 echo "    Upadate Homebrew...    "
 echo "==========================="
-echo
-brew update
-brew upgrade
-brew cask upgrade
-brew cleanup
+echo -e "\033[0m"
+brew update --verbose
+brew upgrade --verbose
+brew cask upgrade --verbose
+brew cleanup --verbose
 
-echo
+echo -e "\033[33m"
 echo "==========================="
 echo "    Upadate Ruby Gem...    "
 echo "==========================="
-echo
+echo -e "\033[0m"
 sudo gem update --system
 sudo gem update -V
 sudo gem cleanup -V
 
-echo
+echo -e "\033[33m"
 echo "==========================="
 echo "   Upadate Node's npm...   "
 echo "==========================="
-echo
+echo -e "\033[0m"
 npm install -g npm
 npm cache clean -f
