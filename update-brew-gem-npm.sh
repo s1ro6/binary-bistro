@@ -26,3 +26,12 @@ echo "==========================="
 echo -e "\033[0m"
 npm install -g npm
 npm cache clean -f
+
+#
+# Fix missing node 10 LTS
+#
+if ! [ -x "/usr/local/bin/node" ]; then
+    echo "Installing and linking Node 10 LTS...."
+    brew install node@10
+    brew link node@10 --force --overwrite
+fi
