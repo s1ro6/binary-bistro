@@ -34,4 +34,5 @@ if ! [ -x "/usr/local/bin/node" ]; then
     echo "Installing and linking Node 10 LTS...."
     brew install node@10
     brew link node@10 --force --overwrite
+    npm install -g npm
 fi
