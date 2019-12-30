@@ -62,6 +62,7 @@ function fix_issue() {
     fi
 }
 
+upgrade_oh_my_zsh
 update_brew
 update_gem
 update_npm
