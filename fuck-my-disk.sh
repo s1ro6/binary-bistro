@@ -23,8 +23,7 @@ function getHumanReadableResult() {
     elif [[ $SIZE_NUMBER -gt 1000 ]]; then
         SIZE_NUMBER="$((SIZE_NUMBER / 1000)) MB"
     fi
-    # echo -e "\nTotal cache size: \033[32m$SIZE_NUMBER\033[0m\n"
-    echo -e "\nTotal cache size: $SIZE_NUMBER"
+    echo -e "\nTotal cache size: \033[32m$SIZE_NUMBER\033[0m\n"
     echo -e "Curren available space: $(df -H | grep "disk1s1" | awk '{print $4}')"
 }
 
