@@ -11,7 +11,7 @@ function removeFiles() {
             TOTAL_CACHE_SIZE=$((TOTAL_CACHE_SIZE + DIR_SIZE))
             echo "$DIR_SIZE KB [$DIR_PATH]"
 
-            mv "$DIR_PATH/*" "$HOME/.Trash"
+            mv "$DIR_PATH" "$HOME/.Trash/"
         else
             echo "The folder does not exist. [$DIR_PATH]"
         fi
