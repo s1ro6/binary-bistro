@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/usr/bin/env zsh
 
 function update_brew() {
     if type brew >/dev/null 2>&1; then
