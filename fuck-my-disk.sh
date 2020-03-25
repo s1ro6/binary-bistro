@@ -6,10 +6,12 @@ TOTAL_CACHE_SIZE=0
 
 function removeFiles() {
     for DIR_PATH in "$@"; do
-        if [[ -e $DIR_PATH ]] && [[ -d $DIR_PATH ]]; then
+        if [[ -d $DIR_PATH ]]; then
             DIR_SIZE=$(du -ks "$DIR_PATH" | awk '{print $1}')
             TOTAL_CACHE_SIZE=$((TOTAL_CACHE_SIZE + DIR_SIZE))
             echo "$DIR_SIZE KB [$DIR_PATH]"
+
+            mv "$DIR_PATH/*" "$HOME/.Trash"
         else
             echo "The folder does not exist. [$DIR_PATH]"
         fi
