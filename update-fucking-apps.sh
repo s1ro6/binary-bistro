@@ -1,20 +1,37 @@
 #!/usr/bin/env zsh
 
-function update_brew() {
+function updateBrew() {
     if type brew >/dev/null 2>&1; then
         echo -e "\033[33m"
         echo "==========================="
         echo "    Upadate Homebrew...    "
         echo "==========================="
         echo -e "\033[0m"
-        brew update --verbose
-        brew upgrade --verbose
-        brew cask upgrade --verbose
-        brew cleanup --verbose
+        brew update
+        brew upgrade
+        brew cleanup
     fi
 }
 
-function update_gem() {
+function updateBrewCask() {
+    if type brew >/dev/null 2>&1; then
+        echo -e "\033[33m"
+        echo "================================"
+        echo "    Upadate Homebrew Cask...    "
+        echo "================================"
+        echo -e "\033[0m"
+
+        echo "Fech installed application list..."
+        CASK_LIST=($(brew cask list))
+
+        echo "Updating brew cask apps..."
+        for APP_NAME in "${CASK_LIST[@]}"; do
+            brew cask upgrade $APP_NAME
+        done
+    fi
+}
+
+function updateGem() {
     if type gem >/dev/null 2>&1; then
         echo -e "\033[33m"
         echo "==========================="
@@ -27,7 +44,7 @@ function update_gem() {
     fi
 }
 
-function update_npm() {
+function updateNpm() {
     if type npm >/dev/null 2>&1; then
         echo -e "\033[33m"
         echo "==========================="
@@ -39,7 +56,7 @@ function update_npm() {
     fi
 }
 
-function update_mas() {
+function updateMas() {
     if type mas >/dev/null 2>&1; then
         echo -e "\033[33m"
         echo "=============================="
@@ -50,7 +67,7 @@ function update_mas() {
     fi
 }
 
-function fix_issue() {
+function fixIssue() {
     #
     # Fix missing node 10 LTS
     #
@@ -62,9 +79,9 @@ function fix_issue() {
     fi
 }
 
-upgrade_oh_my_zsh
-update_brew
-update_gem
-update_npm
-update_mas
-fix_issue
+updateBrew
+updateBrewCask
+updateGem
+updateNpm
+updateMas
+fixIssue
