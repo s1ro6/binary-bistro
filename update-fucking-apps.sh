@@ -28,6 +28,7 @@ function updateBrewCask() {
         for APP_NAME in "${CASK_LIST[@]}"; do
             brew cask upgrade $APP_NAME
         done
+        brew cleanup
     fi
 }
 
