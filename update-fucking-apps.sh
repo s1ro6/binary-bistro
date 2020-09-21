@@ -7,9 +7,9 @@ update_brew() {
     echo "    Upadate Homebrew...    "
     echo "==========================="
     echo -e "\033[0m"
+
     brew update
     brew upgrade
-    brew cleanup
   fi
 }
 
@@ -21,14 +21,12 @@ update_brew_cask() {
     echo "================================"
     echo -e "\033[0m"
 
-    echo "Fech installed application list..."
-    CASK_LIST=($(brew cask list))
-
-    echo "Updating brew cask apps..."
-    for APP_NAME in "${CASK_LIST[@]}"; do
-      brew cask upgrade $APP_NAME
+    echo "Loading brew cask app list..."
+    app_list=($(brew list --cask))
+    for app in "${app_list[@]}"; do
+      echo "Updating apps: ${app}..."
+      brew upgrade --cask $app
     done
-    brew cleanup
   fi
 }
 
@@ -39,9 +37,9 @@ update_gem() {
     echo "    Upadate Ruby Gem...    "
     echo "==========================="
     echo -e "\033[0m"
+
     sudo gem update --system
     sudo gem update -V
-    sudo gem cleanup -V
   fi
 }
 
@@ -52,8 +50,8 @@ update_npm() {
     echo "   Upadate Node's npm...   "
     echo "==========================="
     echo -e "\033[0m"
+
     npm install -g npm
-    npm cache clean -f
   fi
 }
 
@@ -64,8 +62,15 @@ update_mas() {
     echo "   Upadate Mac App Store...   "
     echo "=============================="
     echo -e "\033[0m"
+
     mas upgrade
   fi
+}
+
+remove_caches() {
+  brew cleanup
+  npm cache clean -f
+  sudo gem cleanup -V
 }
 
 fix_issue() {
@@ -85,4 +90,5 @@ update_brew_cask
 update_gem
 update_npm
 update_mas
+remove_caches
 fix_issue
