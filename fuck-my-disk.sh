@@ -44,6 +44,7 @@ remove_normal_caches() {
     # Apple Xcode Caches
     "$HOME/Library/Developer/Xcode/DerivedData"
     "$HOME/Library/Developer/Xcode/iOS DeviceSupport"
+    "$HOME/Library/Developer/CoreSimulator/Caches"
   )
 
   remove_cache_file "${CACHE_DIR_LIST[@]}"
@@ -56,7 +57,7 @@ remove_wechat_caches() {
 }
 
 # Tencent WeWork (aka WeChat Work Edition)
-remove_wechat_work_caches() {
+remove_wecom_caches() {
   root_data_path="$HOME/Library/Containers/com.tencent.WeWorkMac/Data/Library/Application Support/WXWork/Data"
   root_data_subdir_list=$(ls "$root_data_path")
 
@@ -76,7 +77,7 @@ remove_wechat_work_caches() {
 
 main() {
   remove_normal_caches
-  remove_wechat_work_caches
+  remove_wecom_caches
   get_human_readable_result $TOTAL_CACHE_SIZE
 }
 
