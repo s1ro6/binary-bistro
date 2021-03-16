@@ -75,12 +75,12 @@ remove_caches() {
 
 fix_issue() {
   #
-  # Fix missing node 10 LTS
+  # Fix missing node 12 LTS
   #
   if ! [ -x "/usr/local/bin/node" ]; then
-    echo "Installing and linking Node 10 LTS...."
-    brew install node@10
-    brew link node@10 --force --overwrite
+    echo "Installing and linking Node 12 LTS...."
+    brew install node@12
+    brew link node@12 --force --overwrite
     npm install -g npm
   fi
 }
