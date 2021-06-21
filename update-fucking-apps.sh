@@ -68,7 +68,7 @@ update_mas() {
 }
 
 remove_caches() {
-  brew cleanup
+  brew cleanup --prune=all
   npm cache clean -f
   sudo gem cleanup -V
 }
