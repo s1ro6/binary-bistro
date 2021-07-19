@@ -9,24 +9,7 @@ update_brew() {
     echo -e "\033[0m"
 
     brew update
-    brew upgrade
-  fi
-}
-
-update_brew_cask() {
-  if type brew >/dev/null 2>&1; then
-    echo -e "\033[33m"
-    echo "================================"
-    echo "    Upadate Homebrew Cask...    "
-    echo "================================"
-    echo -e "\033[0m"
-
-    echo "Loading brew cask app list..."
-    app_list=($(brew list --cask))
-    for app in "${app_list[@]}"; do
-      echo "Updating apps: ${app}..."
-      brew upgrade --cask $app
-    done
+    brew upgrade --greedy
   fi
 }
 
@@ -55,18 +38,6 @@ update_npm() {
   fi
 }
 
-update_mas() {
-  if type mas >/dev/null 2>&1; then
-    echo -e "\033[33m"
-    echo "=============================="
-    echo "   Upadate Mac App Store...   "
-    echo "=============================="
-    echo -e "\033[0m"
-
-    mas upgrade
-  fi
-}
-
 remove_caches() {
   brew cleanup --prune=all
   npm cache clean -f
@@ -86,9 +57,8 @@ fix_issue() {
 }
 
 update_brew
-update_brew_cask
 update_gem
 update_npm
-update_mas
 remove_caches
 fix_issue
+
