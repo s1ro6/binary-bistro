@@ -13,15 +13,15 @@ def create_isc_content(event_dict):
         "X-APPLE-LANGUAGE:zh\n"\
         "X-APPLE-REGION:CN\n"
 
-    for year, events in event_dict.items():
-        for event in events:
+    for year, holiday_list in event_dict.items():
+        for holiday in holiday_list:
             stamp = datetime.datetime.today().strftime("%Y%m%dT%H%M%SZ")
             ics_content += "\nBEGIN:VEVENT\n"
             ics_content += f"UID:{str(uuid.uuid4())}\n"
             ics_content += "TRANSP:OPAQUE\n"
-            ics_content += f"SUMMARY:{event[0]}\n"
-            ics_content += f"DTSTART;VALUE=DATE:{year + event[1]}\n"
-            ics_content += f"DTEND;VALUE=DATE:{year + event[2]}\n"
+            ics_content += f"SUMMARY:{holiday[0]}\n"
+            ics_content += f"DTSTART;VALUE=DATE:{year + holiday[1]}\n"
+            ics_content += f"DTEND;VALUE=DATE:{year + holiday[2]}\n"
             ics_content += f"DTSTAMP:{stamp}\n"
             ics_content += "SEQUENCE:0\n"
             ics_content += "BEGIN:VALARM\n"
@@ -53,6 +53,12 @@ if __name__ == "__main__":
             ["国庆日假期", "1001", "1008"],
             ["国庆补休上班", "0926", "0927"],
             ["国庆补休上班", "1009", "1010"],
+        ],
+        "2022": [
+            ["元旦假期", "0101", "0104"],
+            ["春节假期", "0131", "0207"],
+            ["春节补休上班", "0130", "0131"],
+            ["春节补休上班", "0212", "0213"],
         ]
     }
 
