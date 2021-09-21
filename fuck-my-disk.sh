@@ -15,17 +15,6 @@ remove_cache_file() {
   done
 }
 
-get_human_readable_result() {
-  size_number=$1
-  if [[ $size_number -gt 1000000 ]]; then
-    size_number="$((size_number / 1000000)) GB"
-  elif [[ $size_number -gt 1000 ]]; then
-    size_number="$((size_number / 1000)) MB"
-  fi
-  echo -e "\nRemoved cache size: \033[32m$size_number\033[0m"
-  echo -e "Previous available space: $(df -H | grep "disk1s1" | awk '{print $4}')"
-}
-
 # Fixed path caches
 remove_normal_caches() {
   CACHE_DIR_LIST=(
@@ -53,16 +42,18 @@ remove_normal_caches() {
 # Tencent WeChat
 # TODO: Optimize the way getting the cache path
 remove_wechat_caches() {
-  remove_cache_file "$HOME/Library/Containers/com.tencent.xinWeChat/Data/Library/Application Support/com.tencent.xinWeChat/2.0b4.0.9/dec0ab91fa2da81feaff27e057044f2c/Stickers"
+  base_path="$HOME/Library/Containers/com.tencent.xinWeChat/Data/Library/Application Support/com.tencent.xinWeChat"
+  version_path="2.0b4.0.9/dec0ab91fa2da81feaff27e057044f2c"
+  remove_cache_file "${base_path}/${version_path}/Stickers"
 }
 
 # Tencent WeWork (aka WeChat Work Edition)
 remove_wecom_caches() {
-  root_data_path="$HOME/Library/Containers/com.tencent.WeWorkMac/Data/Library/Application Support/WXWork/Data"
-  root_data_subdir_list=$(ls "$root_data_path")
+  base_path="$HOME/Library/Containers/com.tencent.WeWorkMac/Data/Library/Application Support/WXWork/Data"
+  subdir_list=$(ls "$base_path")
 
-  for random_dir_name in $root_data_subdir_list; do
-    random_dir_path="$root_data_path/$random_dir_name"
+  for random_dir_name in $subdir_list; do
+    random_dir_path="$base_path/$random_dir_name"
     if [[ -d "$random_dir_path/Cache" ]]; then
       cache_path_list=(
         "$random_dir_path/Cache"
@@ -75,10 +66,21 @@ remove_wecom_caches() {
   done
 }
 
+show_readable_result() {
+  if [[ $TOTAL_CACHE_SIZE -gt 1000000 ]]; then
+    TOTAL_CACHE_SIZE="$((TOTAL_CACHE_SIZE / 1000000)) GB"
+  elif [[ $TOTAL_CACHE_SIZE -gt 1000 ]]; then
+    TOTAL_CACHE_SIZE="$((TOTAL_CACHE_SIZE / 1000)) MB"
+  fi
+  echo -e "\nRemoved cache size: \033[32m$TOTAL_CACHE_SIZE\033[0m"
+  echo -e "Previous available space: $(df -H | grep "disk1s1" | awk '{print $4}')"
+}
+
 main() {
   remove_normal_caches
   remove_wecom_caches
-  get_human_readable_result $TOTAL_CACHE_SIZE
+  remove_wechat_caches
+  show_readable_result
 }
 
 main
