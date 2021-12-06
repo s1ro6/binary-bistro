@@ -4,7 +4,7 @@
 
 TOTAL_CACHE_SIZE=0
 
-remove_cache_file() {
+count_then_remove() {
   for dir_path in "$@"; do
     if [[ -d $dir_path ]]; then
       dir_size=$(du -ks "$dir_path" | awk '{print $1}')
@@ -36,15 +36,17 @@ remove_normal_caches() {
     "$HOME/Library/Developer/CoreSimulator/Caches"
   )
 
-  remove_cache_file "${CACHE_DIR_LIST[@]}"
+  count_then_remove "${CACHE_DIR_LIST[@]}"
 }
 
 # Tencent WeChat
-# TODO: Optimize the way getting the cache path
 remove_wechat_caches() {
-  base_path="$HOME/Library/Containers/com.tencent.xinWeChat/Data/Library/Application Support/com.tencent.xinWeChat"
-  version_path="2.0b4.0.9/dec0ab91fa2da81feaff27e057044f2c"
-  remove_cache_file "${base_path}/${version_path}/Stickers"
+  base_path="$HOME/Library/Containers/com.tencent.xinWeChat/Data/Library/Application Support/com.tencent.xinWeChat/2.0b4.0.9"
+  account_md5_list=$(ls -a "$base_path" | awk '{if (length($0) == 32) print $0}')
+  for account_md5 in $account_md5_list; do
+    count_then_remove "$base_path/$account_md5/Avatar"
+    count_then_remove "$base_path/$account_md5/Stickers"
+  done
 }
 
 # Tencent WeWork (aka WeChat Work Edition)
@@ -61,7 +63,7 @@ remove_wecom_caches() {
         "$random_dir_path/Emotion"
         "$HOME/Library/Containers/com.tencent.WeWorkMac/Data/Upgrade"
       )
-      remove_cache_file "${cache_path_list[@]}"
+      count_then_remove "${cache_path_list[@]}"
     fi
   done
 }
