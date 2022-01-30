@@ -30,21 +30,10 @@ remove_caches() {
   npm cache clean -f
 }
 
-fix_issue() {
-  # Fix missing node 12 LTS
-  if ! [ -x "/usr/local/bin/node" ]; then
-    echo "Installing and linking Node 12 LTS...."
-    brew install node@12
-    brew link node@12 --force --overwrite
-    npm install -g npm
-  fi
-}
-
 main() {
   update_brew
   update_npm
   remove_caches
-  fix_issue
 }
 
 main
